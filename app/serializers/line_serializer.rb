@@ -1,3 +1,4 @@
 class LineSerializer < ActiveModel::Serializer
-  attributes :id, :doodle_id, :brushColor, :brushRadius
+  attributes :brushColor, :brushRadius, :points
+  # has_many :points
 end

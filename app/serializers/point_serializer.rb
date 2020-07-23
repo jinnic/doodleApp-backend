@@ -1,3 +1,5 @@
 class PointSerializer < ActiveModel::Serializer
-  attributes :id, :line_id, :x, :y
+  attributes :x, :y
+  # attributes :x, :y
+  # belongs_to :line
 end
