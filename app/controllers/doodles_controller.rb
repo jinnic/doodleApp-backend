@@ -15,6 +15,12 @@ class DoodlesController < ApplicationController
 
     def create 
         doodle = Doodle.create(doodle_params)
+        byebug
+        #loop through line by its length params[:lines][0][:brushColor]
+        # create line
+        params[:lines].each{ |line| Line.create(brushColor: line[:brushColor], brushRadius: line[:brushRadius], doodle_id: doodle.id)}
+        
+       
         if doodle.valid?
             render json: doodle
           else
@@ -36,6 +42,7 @@ class DoodlesController < ApplicationController
     private
 
     def doodle_params
-        params.permit(:name, :width, :height, :user_id)
+        params.require(:doodle).permit(:name, :width, :height, :user_id,
+                     lines_attributes: [:brushColor, :brushRadius, :doodle_id])
     end
 end

@@ -22,6 +22,6 @@ class LinesController < ApplicationController
     private
 
     def line_params
-        params.permit(:brushColor, :brushRadius, :doodle_id)
+        params.require(:line).permit(:brushColor, :brushRadius, :doodle_id)
     end
 end
