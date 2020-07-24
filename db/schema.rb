@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_24_195310) do
+ActiveRecord::Schema.define(version: 2020_07_23_214142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,30 +20,14 @@ ActiveRecord::Schema.define(version: 2020_07_24_195310) do
     t.integer "width"
     t.integer "height"
     t.integer "user_id"
+    t.json "doodle_data"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.json "doodle_data"
   end
 
   create_table "likes", force: :cascade do |t|
     t.integer "doodle_id"
     t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "lines", force: :cascade do |t|
-    t.integer "doodle_id"
-    t.string "brushColor"
-    t.integer "brushRadius"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "points", force: :cascade do |t|
-    t.integer "line_id"
-    t.decimal "x"
-    t.decimal "y"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

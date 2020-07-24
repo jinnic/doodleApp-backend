@@ -15,6 +15,7 @@ class DoodlesController < ApplicationController
 
     def create 
         doodle = Doodle.create(doodle_params)
+        # byebug
         
         #loop through line by its length params[:lines][0][:brushColor]
         # create line
@@ -46,6 +47,6 @@ class DoodlesController < ApplicationController
     private
 
     def doodle_params
-        params.require(:doodle).permit(:name, :width, :height, :user_id, :doodle_data)
+        params.require(:doodle).permit(:name, :width, :height, :user_id, doodle_data: {})
     end
 end
