@@ -15,10 +15,14 @@ class DoodlesController < ApplicationController
 
     def create 
         doodle = Doodle.create(doodle_params)
-        byebug
+        
         #loop through line by its length params[:lines][0][:brushColor]
         # create line
-        params[:lines].each{ |line| Line.create(brushColor: line[:brushColor], brushRadius: line[:brushRadius], doodle_id: doodle.id)}
+        params[:lines].each do |line| 
+            newLine = Line.create(brushColor: line[:brushColor], brushRadius: line[:brushRadius], doodle_id: doodle.id)
+            line[:points].each{|point| Point.create(x: point[:x], y: point[:y], line_id: newLine.id)}
+            # byebug
+        end
         
        
         if doodle.valid?
