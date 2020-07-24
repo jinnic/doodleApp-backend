@@ -18,11 +18,11 @@ class DoodlesController < ApplicationController
         
         #loop through line by its length params[:lines][0][:brushColor]
         # create line
-        params[:lines].each do |line| 
-            newLine = Line.create(brushColor: line[:brushColor], brushRadius: line[:brushRadius], doodle_id: doodle.id)
-            line[:points].each{|point| Point.create(x: point[:x], y: point[:y], line_id: newLine.id)}
-            # byebug
-        end
+        # params[:lines].each do |line| 
+        #     newLine = Line.create(brushColor: line[:brushColor], brushRadius: line[:brushRadius], doodle_id: doodle.id)
+        #     line[:points].each{|point| Point.create(x: point[:x], y: point[:y], line_id: newLine.id)}
+        #     # byebug
+        # end
         
        
         if doodle.valid?
@@ -46,7 +46,6 @@ class DoodlesController < ApplicationController
     private
 
     def doodle_params
-        params.require(:doodle).permit(:name, :width, :height, :user_id,
-                     lines_attributes: [:brushColor, :brushRadius, :doodle_id])
+        params.require(:doodle).permit(:name, :width, :height, :user_id, :doodle_data)
     end
 end
