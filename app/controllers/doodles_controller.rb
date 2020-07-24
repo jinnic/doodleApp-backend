@@ -1,7 +1,7 @@
 class DoodlesController < ApplicationController
     def index
         doodles = Doodle.all
-        render json: doodles, include: "lines.points"
+        render json: doodles, include: ['lines.points']
     end
 
     def show

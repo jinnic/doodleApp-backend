@@ -1,5 +1,4 @@
 class LinesController < ApplicationController
-
     def create 
         line = Line.create(line_params)
         if line.valid?
