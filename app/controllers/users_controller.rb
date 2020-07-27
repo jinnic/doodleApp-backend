@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
-    skip_before_action :require_login, only: [:create]
+    skip_before_action :require_login, only: [:create, :index]
 
-    # def index
-    #     users = User.all
-    #     render json: users
-    # end
+    def index
+        users = User.all
+        render json: users
+    end
 
     # def show
     #     user = User.find(params[:id])

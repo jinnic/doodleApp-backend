@@ -1,4 +1,6 @@
 class DoodlesController < ApplicationController
+    skip_before_action :require_login, only: [:index]
+
     def index
         doodles = Doodle.all
         render json: doodles, include: ['lines.points']
