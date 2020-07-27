@@ -36,6 +36,7 @@ class DoodlesController < ApplicationController
     def destroy
         doodle = Doodle.find(params[:id])
         doodle.destroy
+        render json: doodle
     end
 
     def update
