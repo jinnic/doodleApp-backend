@@ -2,8 +2,8 @@ class DoodlesController < ApplicationController
     skip_before_action :require_login, only: [:index]
 
     def index
-        doodles = Doodle.all
-        render json: doodles, include: ['lines.points']
+        doodles = Doodle.all.order("created_at DESC")
+        render json: doodles
     end
 
     def show
