@@ -5,6 +5,10 @@ class DoodleSerializer < ActiveModel::Serializer
   has_many :likes
 
   def username
-    self.object.user.user_name
+    if self.object.user
+      self.object.user.user_name 
+    else 
+      'admin'
+    end
   end
 end
