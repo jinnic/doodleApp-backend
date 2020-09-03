@@ -8,27 +8,31 @@ class LikesController < ApplicationController
 
     def create 
         like = Like.find_or_initialize_by(user_id: like_params[:user_id], doodle_id: like_params[:doodle_id])
-
+        find_doodle(like_params[:doodle_id])
         if like.persisted? 
             like.destroy
-            render json: like.id
+            render json: @doodle
         else
             like.save 
-            render json:like
+            
+            render json: @doodle
         end
     end
 
-    def destroy
-       like = Like.find(params[:id])
-       like.destroy
-       render json:like
-    end
+    # def destroy
+    #    like = Like.find(params[:id])
+    #    like.destroy
+    #    render json:like
+    # end
 
     private
-    def already_liked?
-        Like.where(user_id: params[:user_id], doodle_id:
-        params[:doodle_id]).exists?
-      end
+    def find_doodle(doodle_id)
+        @doodle = Doodle.find(doodle_id)
+    end
+    # def already_liked?
+    #     Like.where(user_id: params[:user_id], doodle_id:
+    #     params[:doodle_id]).exists?
+    #   end
 
     def like_params
         params.require(:like).permit(:user_id, :doodle_id)

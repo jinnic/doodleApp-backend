@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :likes
+  # resources :likes
   resources :doodles do 
-    resources :likes
+    resources :likes, only: [:index, :create]
   end
 
   resources :users, only: [:create, :index, :update, :destroy]
