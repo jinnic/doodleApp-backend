@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   # resources :likes
-  resources :doodles
-  resources :likes, only: [:index, :create]
+  resources :doodles do 
+    resources :likes, only: [:index, :create]
+  end
 
   resources :users, only: [:create, :index, :update, :destroy]
   post "/login", to: "auth#login"
