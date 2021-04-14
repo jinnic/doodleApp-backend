@@ -2,9 +2,17 @@ class DoodlesController < ApplicationController
     skip_before_action :require_login, only: [:index]
 
     def index
-        doodles = Doodle.all.order("created_at DESC")
-        render json: doodles
-    end
+        serialized_doodles = []
+        doodles = Doodle.paginate(page: page).order("created_at DESC")
+        doodles.each do |dood|
+            serialized_doodles << DoodleSerializer.new(dood)
+        end
+        render json: {
+          doodles: serialized_doodles,
+          page: page,
+          total_pages: Doodle.pages
+        }
+      end    
 
     def show
         doodle = Doodle.find(params[:id])
@@ -40,5 +48,9 @@ class DoodlesController < ApplicationController
 
     def doodle_params
         params.require(:doodle).permit(:name, :width, :height, :user_id, doodle_data: {})
+    end
+
+    def page
+        params[:page] || 1
     end
 end
