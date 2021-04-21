@@ -1,5 +1,5 @@
 class DoodleSerializer < ActiveModel::Serializer
-  attributes :id, :name, :width, :height, :user_id, :doodle_data, :username
+  attributes :id, :name, :width, :height, :user_id, :doodle_data, :username, :likes
 
   # belongs_to :user 
   has_many :likes
@@ -11,5 +11,13 @@ class DoodleSerializer < ActiveModel::Serializer
       'admin'
     end
   end
+
+  # def likes 
+  #   if self.object.likes
+  #     self.object.likes 
+  #   else 
+  #     []
+  #   end 
+  # end 
 
 end

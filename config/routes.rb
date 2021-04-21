@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :likes, only: [:index, :create]
   end
 
-  resources :users, only: [:create, :index, :update, :destroy]
+  resources :users, only: [:create, :index, :update, :destroy, :show]
   post "/login", to: "auth#login"
   get "/auto_login", to: "auth#auto_login"
   get "/user_is_authed", to: "auth#user_is_authed"

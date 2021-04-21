@@ -3,7 +3,7 @@ class DoodlesController < ApplicationController
 
     def index
         serialized_doodles = []
-        doodles = Doodle.paginate(page: page).order("created_at DESC")
+        doodles = Doodle.paginate(page: page)
         doodles.each do |dood|
             serialized_doodles << DoodleSerializer.new(dood)
         end
