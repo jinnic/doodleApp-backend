@@ -8,11 +8,19 @@ class UsersController < ApplicationController
 
     def show
         user = User.find(params[:id])
-        if user 
-            render json: user 
-        else 
-            render json: { error: "Not found"}, status: 404
+
+        serialized_doodles = []
+        doodles = user.doodles.paginate(page: page)
+        doodles.each do |dood|
+            serialized_doodles << DoodleSerializer.new(dood)
         end
+        render json: {
+          user: user, 
+          doodles: serialized_doodles,
+          page: page,
+          total_pages: user.doodles.pages
+        }
+
     end
 
     def create 
@@ -41,6 +49,10 @@ class UsersController < ApplicationController
 
     def user_params
         params.permit(:user_name, :password, :bio)
+    end
+
+    def page
+        params[:page] || 1
     end
 
 end
