@@ -27,6 +27,7 @@ class DoodlesController < ApplicationController
         #total_page test
         doodle = Doodle.create(doodle_params)
         if doodle.valid?
+            doodle = DoodleSerializer.new(doodle)
             render json: { doodle: doodle, total_pages: session_user.doodles.pages}
           else
             render json: { errors: doodle.errors.full_messages }, status: 400
