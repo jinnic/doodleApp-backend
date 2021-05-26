@@ -24,9 +24,10 @@ class DoodlesController < ApplicationController
     end
 
     def create 
+        #total_page test
         doodle = Doodle.create(doodle_params)
         if doodle.valid?
-            render json: doodle
+            render json: { doodle: doodle, total_pages: session_user.doodles.pages}
           else
             render json: { errors: doodle.errors.full_messages }, status: 400
         end
